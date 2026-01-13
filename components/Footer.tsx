@@ -2,20 +2,20 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="py-16 px-6 sm:px-8 lg:px-12 xl:px-16 border-t border-accent/10"
+      className="py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 border-t border-accent/10"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-foreground font-mono text-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+          <div className="mb-2 md:mb-0 text-center md:text-left">
+            <p className="text-foreground font-mono text-xs sm:text-sm break-words">
               © {new Date().getFullYear()} Saratchandra Patnaik. All rights
               reserved.
             </p>
           </div>
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
             <a
               href="mailto:sarath92015@gmail.com"
-              className="text-accent font-mono text-sm hover:text-accent-dark transition-colors"
+              className="text-accent font-mono text-xs sm:text-sm hover:text-accent-dark transition-colors break-words"
             >
               sarath92015@gmail.com
             </a>

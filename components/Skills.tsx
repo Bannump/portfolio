@@ -33,22 +33,22 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-16 px-6 sm:px-8 lg:px-12 xl:px-16 bg-black border-t border-accent/10"
+      className="py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-black border-t border-accent/10"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-3xl font-mono font-bold mb-8 text-accent">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-6 sm:mb-8 md:mb-12 text-accent">
           Technical Skills
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={index}
-              className="bg-black/50 border border-accent/20 rounded-lg p-6 hover:border-accent/40 transition-all duration-300"
+              className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 hover:border-accent/40 transition-all duration-300"
             >
-              <h3 className="text-accent font-mono font-semibold mb-3 text-sm">
+              <h3 className="text-accent font-mono font-semibold mb-2 sm:mb-3 text-xs sm:text-sm break-words">
                 {category.title}
               </h3>
-              <p className="text-foreground text-sm leading-relaxed">
+              <p className="text-foreground text-xs sm:text-sm leading-relaxed break-words">
                 {category.skills}
               </p>
             </div>

@@ -96,45 +96,45 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-24 px-6 sm:px-8 lg:px-12 xl:px-16 bg-black"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-black"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-4xl font-mono font-bold mb-16 text-accent">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-8 sm:mb-12 md:mb-16 text-accent">
           Professional Experience
         </h2>
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className="bg-black/50 border border-accent/20 rounded-lg p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
+              className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
             >
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
-                <div>
-                  <h3 className="text-2xl font-mono font-semibold text-foreground mb-2">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4 gap-2">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-1 sm:mb-2 break-words">
                     {exp.title}
                   </h3>
-                  <p className="text-foreground/80 font-mono">
+                  <p className="text-sm sm:text-base text-foreground/80 font-mono break-words">
                     {exp.company}
                     {exp.location && ` | ${exp.location}`}
                   </p>
                 </div>
-                <span className="text-accent font-mono text-sm sm:text-base whitespace-nowrap">
+                <span className="text-accent font-mono text-xs sm:text-sm md:text-base whitespace-nowrap sm:ml-4">
                   {exp.date}
                 </span>
               </div>
               {exp.tech && (
-                <p className="text-foreground/70 mb-4 font-mono text-sm">
+                <p className="text-foreground/70 mb-3 sm:mb-4 font-mono text-xs sm:text-sm break-words">
                   <span className="text-accent font-semibold">Tech:</span>{" "}
                   {exp.tech}
                 </p>
               )}
-              <ul className="space-y-3 mt-6">
+              <ul className="space-y-2 sm:space-y-3 mt-4 sm:mt-6">
                 {exp.achievements.map((achievement, idx) => (
                   <li
                     key={idx}
-                    className="text-foreground leading-relaxed flex items-start"
+                    className="text-sm sm:text-base text-foreground leading-relaxed flex items-start break-words"
                   >
-                    <span className="text-accent mr-2 mt-1">▹</span>
+                    <span className="text-accent mr-2 mt-1 flex-shrink-0">▹</span>
                     <span>
                       {achievement.category && (
                         <span className="text-accent font-semibold">
