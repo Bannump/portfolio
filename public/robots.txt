@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bannump.github.io/sitemap.xml
