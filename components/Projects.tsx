@@ -13,7 +13,7 @@ export default function Projects() {
       techStack: "AWS IoT Greengrass, Lambda, MQTT, PyTorch",
       description:
         "Built a real-time \"Smart Camera\" system deploying MTCNN and FaceNet models directly to the edge. Engineered a custom deployment pipeline to run raw PyTorch models in a pip-free AWS Lambda environment. Orchestrated asynchronous communication between Edge and Cloud using MQTT and SQS.",
-      link: "https://github.com/Bannump",
+      link: "",
       linkText: "View Architecture",
       icon: "☁️",
     },
@@ -22,8 +22,8 @@ export default function Projects() {
       techStack: "CUDA, PyCUDA, Python, C++",
       description:
         "Achieved 20x speedup over CPU implementations by engineering a parallel 2D Gaussian Filter. Optimized kernel performance using Shared Memory Tiling, Loop Unrolling, and Grid-Stride Loops to minimize global memory latency. Validated image fidelity using PSNR and SSIM metrics.",
-      link: "https://github.com/Bannump",
-      linkText: "View Code",
+      link: "https://colab.research.google.com/drive/1skDO575EXu8og_oKeHr-aXHgNLaSkC__?usp=sharing",
+      linkText: "View on Google Colab",
       icon: "🚀",
     },
     udp: {
