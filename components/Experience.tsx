@@ -130,8 +130,7 @@ export default function Experience() {
                     AWS EKS, FastAPI, ArgoCD, Terraform, GenAI
                   </p>
                   <p className="text-sm sm:text-base text-foreground leading-relaxed break-words mb-6">
-                    Automated root cause analysis using LLMs (60% time
-                    reduction) and managed 15+ microservices on AWS EKS.
+                  Engineered high-throughput distributed systems for real-time media streaming and architected intelligent fault-tolerance workflows that eliminated 60% of operational overhead.
                   </p>
 
                   <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">

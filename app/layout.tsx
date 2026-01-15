@@ -12,6 +12,9 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   title: "Saratchandra Patnaik | Software Engineer",
   description: "AI-Focused Software Engineer specializing in Cloud Native Development and Applied Cryptography. MS CS Graduate (ASU '25) | Ex-Amagi Media Labs.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export const viewport: Viewport = {
