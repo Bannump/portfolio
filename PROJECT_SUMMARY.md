@@ -114,7 +114,7 @@ venkata_saratchandra_portfolio/
 ### 4. Projects Section (components/Projects.tsx)
 **Projects**:
 1. **My Personal AI Agent (RAG)**
-   - Link: https://github.com/Bannump/RAG.git
+   - Link: https://github.com/Bannump/PersonalAgent-RAG.git
    - Description: RAG application with vehicle diagnostics, resume analysis, ATS optimization
 
 2. **UDP Multi-Threading System**

@@ -1,4 +1,13 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function Experience() {
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Experience.tsx:6',message:'Experience component rendering',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+    // #endregion
+  }, []);
   const experiences = [
     {
       title: "Software Engineer (Cloud & DevOps)",

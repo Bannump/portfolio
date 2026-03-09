@@ -1,10 +1,19 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function Projects() {
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Projects.tsx:5',message:'Projects component rendering',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+  }, []);
   const projects = {
     rag: {
       title: "My Personal AI Agent (RAG)",
       description:
         "A sophisticated RAG (Retrieval-Augmented Generation) application serving as a personal AI assistant. Features vehicle diagnostics from images, resume analysis & ATS optimization, and intelligent resume building. Built with Python, ChromaDB, OpenAI/Anthropic APIs, and vision AI integration.",
-      link: "https://github.com/Bannump/RAG.git",
+      link: "https://github.com/Bannump/PersonalAgent-RAG.git",
       linkText: "View on GitHub",
       icon: "🤖",
     },
@@ -93,27 +102,34 @@ export default function Projects() {
             <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed break-words">
               {projects.edgeAI.description}
             </p>
-            <a
-              href={projects.edgeAI.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
-            >
-              {projects.edgeAI.linkText}
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {projects.edgeAI.link ? (
+              <a
+                href={projects.edgeAI.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
+                onClick={()=>{fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Projects.tsx:105',message:'EdgeAI link clicked',data:{link:projects.edgeAI.link,isEmpty:!projects.edgeAI.link},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});}}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
+                {projects.edgeAI.linkText}
+                <svg
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <span className="inline-flex items-center text-foreground/50 font-mono text-sm sm:text-base break-words">
+                {projects.edgeAI.linkText}
+              </span>
+            )}
           </div>
 
           {/* GPU Accelerated Image Processing Project */}
