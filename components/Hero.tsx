@@ -1,6 +1,43 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Hero() {
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:8',message:'Hero component mounted',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
+    const checkImage = () => {
+      const img = document.querySelector('img[src*="profile-photo"]') as HTMLImageElement;
+      if (img) {
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:12',message:'Profile image found in DOM',data:{src:img.src,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+        if (!img.complete) {
+          img.addEventListener('load', () => {
+            // #region agent log
+            fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:17',message:'Profile image loaded successfully',data:{src:img.src},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+            // #endregion
+          });
+          img.addEventListener('error', () => {
+            // #region agent log
+            fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:21',message:'Profile image failed to load',data:{src:img.src},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+            // #endregion
+          });
+        } else {
+          // #region agent log
+          fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:25',message:'Profile image already loaded',data:{src:img.src,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+          // #endregion
+        }
+      } else {
+        // #region agent log
+        fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Hero.tsx:29',message:'Profile image not found in DOM',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
+      }
+    };
+    setTimeout(checkImage, 100);
+  }, []);
   return (
     <header className="hero min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 md:pt-24 pb-12 md:pb-16">
       <div className="max-w-7xl mx-auto w-full">

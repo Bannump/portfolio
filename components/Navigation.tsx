@@ -7,7 +7,13 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navigation.tsx:9',message:'Navigation useEffect running',data:{hasWindow:typeof window!=='undefined'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
     const handleScroll = () => {
+      // #region agent log
+      fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navigation.tsx:11',message:'Scroll event fired',data:{scrollY:window.scrollY,isScrolled:window.scrollY>20},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+      // #endregion
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
@@ -42,6 +48,7 @@ export default function Navigation() {
               <a
                 href="#experience"
                 className="text-foreground hover:text-accent transition-colors font-mono text-sm lg:text-base"
+                onClick={(e)=>{fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Navigation.tsx:42',message:'Experience link clicked',data:{href:'#experience',hasTarget:!!document.querySelector('#experience')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});}}
               >
                 Experience
               </a>
