@@ -31,8 +31,8 @@ export default function Projects() {
       techStack: "CUDA, PyCUDA, Python, C++",
       description:
         "Achieved 20x speedup over CPU implementations by engineering a parallel 2D Gaussian Filter. Optimized kernel performance using Shared Memory Tiling, Loop Unrolling, and Grid-Stride Loops to minimize global memory latency. Validated image fidelity using PSNR and SSIM metrics.",
-      link: "https://colab.research.google.com/drive/1skDO575EXu8og_oKeHr-aXHgNLaSkC__?usp=sharing",
-      linkText: "View on Google Colab",
+      link: "https://github.com/Bannump/gpu-accelerated-image-processing/blob/version1/Project.ipynb",
+      linkText: "View on GitHub",
       icon: "🚀",
     },
     udp: {
