@@ -13,7 +13,7 @@ export default function Projects() {
       title: "My Personal AI Agent (RAG)",
       description:
         "A sophisticated RAG (Retrieval-Augmented Generation) application serving as a personal AI assistant. Features vehicle diagnostics from images, resume analysis & ATS optimization, and intelligent resume building. Built with Python, ChromaDB, OpenAI/Anthropic APIs, and vision AI integration.",
-      link: "https://github.com/Bannump/PersonalAgent-RAG.git",
+      link: "https://github.com/Bannump/portfolio/blob/main/README.md",
       linkText: "View on GitHub",
       icon: "🤖",
     },
@@ -39,7 +39,7 @@ export default function Projects() {
       title: "UDP Multi-Threading System",
       description:
         "High-performance telecom component simulation that receives encrypted custom packets via UDP, processes them using multi-threading (producer-consumer pattern), and reports statistics via POSIX shared memory (IPC). Demonstrates advanced C++ system programming, network protocols, and concurrent processing.",
-      link: "https://github.com/Bannump/udp-multi-threading.git",
+      link: "https://github.com/Bannump/udp-multi-threading/blob/udp-multi-threading-version-1/README.md",
       linkText: "View on GitHub",
       icon: "⚡",
     },
