@@ -23,40 +23,41 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto w-full">
 
         {/* CTA block */}
-        <div className="mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-accent mb-4">
+        <div className="mb-12 sm:mb-14">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold text-accent mb-3">
             Get in Touch
           </h2>
-          <p className="text-sm sm:text-base text-foreground/70 font-mono mb-2 max-w-2xl">
-            Open to backend, distributed systems, cloud infrastructure, and reliability
-            engineering roles. If you&apos;re working on systems that have to stay up — let&apos;s talk.
+          <p className="text-sm sm:text-base text-foreground/60 font-mono max-w-xl leading-relaxed">
+            Open to backend, cloud infrastructure, and reliability engineering roles.
+            If you&apos;re building systems that need to stay up — I&apos;d like to hear about it.
           </p>
           <a
             href="mailto:sarath92015@gmail.com"
-            className="inline-flex items-center mt-5 px-6 py-3 bg-accent text-background font-mono font-semibold text-sm rounded-md hover:bg-accent-dark transition-all duration-300 transform hover:scale-105 shadow-lg shadow-accent/20"
+            className="inline-flex items-center mt-6 px-6 py-3 bg-accent text-background font-mono font-semibold text-sm rounded-md hover:bg-accent-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-accent/20"
           >
-            sarath92015@gmail.com
+            Send an Email
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
 
-          <div className="flex space-x-4 mt-6">
+          <div className="flex items-center gap-5 mt-6">
             <a
               href="https://github.com/Bannump"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-foreground/60 hover:text-accent transition-colors font-mono text-sm"
+              className="flex items-center gap-2 text-foreground/50 hover:text-accent transition-colors font-mono text-sm"
               aria-label="GitHub"
             >
               <GitHubIcon />
               <span>GitHub</span>
             </a>
+            <span className="text-foreground/20 text-xs">·</span>
             <a
               href="https://www.linkedin.com/in/saratchandra-patnaik"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-foreground/60 hover:text-accent transition-colors font-mono text-sm"
+              className="flex items-center gap-2 text-foreground/50 hover:text-accent transition-colors font-mono text-sm"
               aria-label="LinkedIn"
             >
               <LinkedInIcon />
@@ -67,8 +68,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-accent/10 pt-6">
-          <p className="text-foreground/40 font-mono text-xs">
-            © {new Date().getFullYear()} Saratchandra Patnaik. All rights reserved.
+          <p className="text-foreground/30 font-mono text-xs">
+            © {new Date().getFullYear()} Saratchandra Patnaik
           </p>
         </div>
 

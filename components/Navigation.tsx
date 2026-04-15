@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from "react";
 
+const sections = ["experience", "skills", "projects", "contact"] as const;
+
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +15,26 @@ export default function Navigation() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track which section is in the viewport
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { threshold: 0.3, rootMargin: "-80px 0px -40% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -26,19 +49,26 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="flex justify-between items-center h-16 md:h-20">
-          <div className="font-mono text-lg sm:text-xl font-semibold text-accent">
+          <a href="#" className="font-mono text-lg sm:text-xl font-semibold text-accent hover:text-accent/80 transition-colors">
             SP
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <ul className="hidden md:flex space-x-6 lg:space-x-8">
-            {["experience", "skills", "projects", "contact"].map((section) => (
+            {sections.map((section) => (
               <li key={section}>
                 <a
                   href={`#${section}`}
-                  className="text-foreground hover:text-accent transition-colors font-mono text-sm lg:text-base capitalize"
+                  className={`relative font-mono text-sm lg:text-base capitalize transition-colors duration-200 ${
+                    activeSection === section
+                      ? "text-accent"
+                      : "text-foreground/60 hover:text-foreground"
+                  }`}
                 >
                   {section}
+                  {activeSection === section && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-accent rounded-full" />
+                  )}
                 </a>
               </li>
             ))}
@@ -65,12 +95,16 @@ export default function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-accent/20 bg-background/95 backdrop-blur-md">
             <ul className="flex flex-col space-y-1 py-4 px-4">
-              {["experience", "skills", "projects", "contact"].map((section) => (
+              {sections.map((section) => (
                 <li key={section}>
                   <a
                     href={`#${section}`}
                     onClick={closeMobileMenu}
-                    className="block text-foreground hover:text-accent transition-colors font-mono text-base py-2 capitalize"
+                    className={`block font-mono text-base py-2 capitalize transition-colors ${
+                      activeSection === section
+                        ? "text-accent"
+                        : "text-foreground hover:text-accent"
+                    }`}
                   >
                     {section}
                   </a>

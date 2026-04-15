@@ -31,7 +31,7 @@ export const experiences: ExperienceEntry[] = [
     title: "Graduate Research Assistant",
     company: "Arizona State University",
     location: "Tempe, AZ",
-    date: "Aug 2025 – Dec 2025",
+    date: "Jan 2026 – Present",
     tech: null,
     summary:
       "Contributing to research in software verification, validation, and automated testing under faculty supervision at ASU.",
@@ -102,7 +102,7 @@ export const projects: ProjectEntry[] = [
     description:
       "Multi-modal RAG application with Clean Architecture for swappable LLM providers (OpenAI, Anthropic). ChromaDB for vector retrieval. GPT-4 Vision for vehicle diagnostics from images. ATS resume optimization with vector embeddings. Composable use-case design.",
     techStack: "Python, ChromaDB, OpenAI API, Anthropic API, LangChain, GPT-4 Vision",
-    link: "https://github.com/Bannump/portfolio",
+    link: "https://github.com/Bannump/PersonalAgent-RAG/blob/version1/README.md",
     topics: ["RAG", "LLM", "vector databases", "vision", "resume", "AI", "ChromaDB", "Clean Architecture"],
   },
 ];
@@ -162,37 +162,79 @@ export function getPortfolioKnowledgeText(): string {
   ].join("\n");
 }
 
-/** Chunked knowledge for keyword/retrieval matching. */
+// Lightweight tokenizer — extracts signal words from a string
+function tokenize(s: string): string[] {
+  const noise = new Set([
+    "the", "and", "for", "with", "that", "from", "into", "across",
+    "when", "was", "were", "this", "they", "their", "also", "has",
+    "have", "had", "its", "are", "been", "being", "not", "but",
+    "via", "per", "one", "two", "all", "each", "both",
+  ]);
+  return s
+    .toLowerCase()
+    .replace(/\+\+/g, "pp")
+    .replace(/[^\w\s]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !noise.has(w));
+}
+
+/** Granular chunks — one per highlight, project, and skill category.
+ *  Keeps specific tech questions from matching the same generic blobs. */
 export function getPortfolioChunks(): { text: string; keywords: string[] }[] {
   const chunks: { text: string; keywords: string[] }[] = [];
+
+  // ── Experience: one chunk per highlight ──
   experiences.forEach((e) => {
-    const text = `${e.title} at ${e.company} (${e.date}). ${e.summary} ${e.highlights.join(" ")}`;
-    const keywords = [
+    const baseKeywords = [
       ...e.title.toLowerCase().split(/\s+/),
       e.company.toLowerCase(),
-      ...(e.tech?.toLowerCase().split(/[\s,]+/) ?? []),
-      "experience", "job", "work",
+      e.company.toLowerCase().split(" ")[0],
+      ...(e.tech?.toLowerCase().replace(/\+\+/g, "pp").split(/[\s,·]+/) ?? []),
     ];
-    chunks.push({ text, keywords });
+
+    // Role summary chunk
+    chunks.push({
+      text: `${e.title} at ${e.company} (${e.date}): ${e.summary}`,
+      keywords: [...baseKeywords, "role", "position", "title", "company", "where"],
+    });
+
+    // One chunk per highlight bullet
+    e.highlights.forEach((highlight) => {
+      chunks.push({
+        text: `At ${e.company}: ${highlight}`,
+        keywords: [...baseKeywords, ...tokenize(highlight)],
+      });
+    });
   });
+
+  // ── Projects ──
   projects.forEach((p) => {
-    const text = `${p.title}. ${p.description} ${p.techStack ?? ""}`;
+    const text = `Project — ${p.title}: ${p.description}${p.techStack ? ` Stack: ${p.techStack}.` : ""}`;
     const keywords = [
       ...p.title.toLowerCase().split(/\s+/),
-      ...p.topics,
-      ...(p.techStack?.toLowerCase().split(/[\s,/]+/) ?? []),
-      "project",
+      ...p.topics.map((t) => t.toLowerCase()),
+      ...(p.techStack?.toLowerCase().replace(/\+\+/g, "pp").split(/[\s,/()·]+/) ?? []),
+      "project", "built",
+      ...tokenize(p.description),
     ];
     chunks.push({ text, keywords });
   });
+
+  // ── Skills: one chunk per category ──
   skillCategories.forEach((s) => {
-    const text = `${s.title}: ${s.skills}`;
+    const text = `Skills — ${s.title}: ${s.skills}`;
+    const skillWords = s.skills
+      .toLowerCase()
+      .replace(/\+\+/g, "pp")
+      .split(/[\s,/()·]+/)
+      .filter((w) => w.length > 1);
     const keywords = [
       ...s.title.toLowerCase().split(/\s+/),
-      ...s.skills.toLowerCase().split(/[\s,/(]+/),
-      "skills",
+      ...skillWords,
+      "skill", "skills", "technology", "tech", "proficient", "language",
     ];
     chunks.push({ text, keywords });
   });
+
   return chunks;
 }

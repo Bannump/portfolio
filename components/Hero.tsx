@@ -11,27 +11,33 @@ export default function Hero() {
   return (
     <header className="hero min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 md:pt-24 pb-12 md:pb-16">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] xl:grid-cols-[1fr_420px] gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-start">
 
           {/* Left: Content */}
-          <div className="text-left space-y-6 lg:space-y-8 relative z-10 min-w-0 w-full">
+          <div className="text-left space-y-6 lg:space-y-7 relative z-10 min-w-0 w-full">
 
             {/* Name + Role */}
-            <div className="space-y-3">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-mono font-bold text-foreground leading-tight">
+            <div className="space-y-2">
+              <h1
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-mono font-bold text-foreground leading-tight animate-fade-up"
+                style={{ animationDelay: "0ms" }}
+              >
                 <span className="text-accent">Saratchandra Patnaik</span>
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground font-mono leading-snug">
+              <p
+                className="text-lg sm:text-xl md:text-2xl lg:text-[1.75rem] text-foreground font-mono leading-snug animate-fade-up"
+                style={{ animationDelay: "120ms" }}
+              >
                 Backend &amp; Distributed Systems Engineer
               </p>
             </div>
 
             {/* Proof points */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 animate-fade-up" style={{ animationDelay: "240ms" }}>
               {proofPoints.map((point) => (
                 <span
                   key={point}
-                  className="inline-block border border-accent/30 text-accent/80 font-mono text-xs px-3 py-1 rounded-full bg-accent/5"
+                  className="inline-block border border-accent/30 text-accent/80 font-mono text-xs px-3 py-1 rounded-full bg-accent/5 hover:bg-accent/10 hover:border-accent/50 transition-colors duration-200"
                 >
                   {point}
                 </span>
@@ -39,52 +45,49 @@ export default function Hero() {
             </div>
 
             {/* Description */}
-            <div className="border-t border-accent/20 pt-5 space-y-3">
+            <div className="border-t border-accent/20 pt-5 space-y-3 animate-fade-up" style={{ animationDelay: "360ms" }}>
               <p className="text-sm sm:text-base md:text-lg text-foreground leading-relaxed font-mono">
-                I build production systems that handle real load under real pressure. At{" "}
-                <span className="text-accent font-semibold">Amagi Media Labs</span> I engineered
-                large-scale media streaming infrastructure on{" "}
-                <span className="text-accent font-semibold">AWS EKS</span> — debugging live
-                streaming failures, implementing failover logic, and automating the operational
-                work that kept 15+ microservices stable for broadcast clients.
+                I specialize in backend engineering, cloud infrastructure, and systems
+                reliability — with production depth in{" "}
+                <span className="text-accent font-semibold">distributed streaming systems</span>,{" "}
+                <span className="text-accent font-semibold">concurrent programming in C++</span>,
+                edge ML inference, and AI-driven observability tooling.
               </p>
-              <p className="text-xs sm:text-sm text-foreground/70 font-mono">
-                Currently pursuing an MS in Computer Science at{" "}
-                <span className="text-accent/80">Arizona State University</span>, with research
-                in software verification and distributed systems reliability.
+              <p className="text-sm sm:text-base md:text-lg text-foreground/80 leading-relaxed font-mono">
+                At{" "}
+                <span className="text-accent font-semibold">Amagi Media Labs</span> I owned
+                reliability for 15+ microservices serving live broadcast clients on{" "}
+                <span className="text-accent font-semibold">AWS EKS</span>. I hold an MS in
+                Computer Science from{" "}
+                <span className="text-accent font-semibold">Arizona State University</span> and
+                currently research fault analysis and software verification in distributed systems.
               </p>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-up" style={{ animationDelay: "480ms" }}>
               <a
                 href="#projects"
-                className="px-6 sm:px-8 py-2.5 sm:py-3 bg-accent text-background font-mono font-semibold text-sm sm:text-base rounded-md hover:bg-accent-dark transition-all duration-300 transform hover:scale-105 shadow-lg shadow-accent/20 w-full sm:w-auto text-center"
+                className="px-6 sm:px-8 py-3 bg-accent text-background font-mono font-semibold text-sm sm:text-base rounded-md hover:bg-accent-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-accent/20 text-center"
               >
                 View My Work
               </a>
               <a
                 href="/Saratchandra_Resume.pdf"
                 download
-                className="px-6 sm:px-8 py-2.5 sm:py-3 border border-accent text-accent font-mono font-semibold text-sm sm:text-base rounded-md hover:bg-accent/10 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto text-center"
+                className="px-6 sm:px-8 py-3 border border-accent text-accent font-mono font-semibold text-sm sm:text-base rounded-md hover:bg-accent/10 transition-all duration-300 hover:scale-105 text-center"
               >
                 Download Resume
-              </a>
-              <a
-                href="#contact"
-                className="px-6 sm:px-8 py-2.5 sm:py-3 border border-foreground/20 text-foreground/70 font-mono font-semibold text-sm sm:text-base rounded-md hover:border-accent/40 hover:text-accent transition-all duration-300 w-full sm:w-auto text-center"
-              >
-                Get in Touch
               </a>
             </div>
 
             {/* Social Links */}
-            <div className="flex space-x-5 pt-2">
+            <div className="flex space-x-5 animate-fade-up" style={{ animationDelay: "580ms" }}>
               <a
                 href="https://github.com/Bannump"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-accent transition-colors"
+                className="text-foreground/50 hover:text-accent transition-colors"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +102,7 @@ export default function Hero() {
                 href="https://www.linkedin.com/in/saratchandra-patnaik"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-accent transition-colors"
+                className="text-foreground/50 hover:text-accent transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -110,15 +113,15 @@ export default function Hero() {
           </div>
 
           {/* Right: Profile Photo */}
-          <div className="flex justify-center lg:justify-end w-full lg:w-auto mt-4 lg:mt-0">
-            <div className="relative group w-full max-w-[280px] sm:max-w-xs md:max-w-sm lg:w-80 lg:max-w-none xl:w-96">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-accent/30 via-accent/10 to-transparent blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 -z-10" />
-              <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] rounded-lg overflow-hidden border-2 border-accent/30 shadow-xl shadow-accent/20 bg-gradient-to-br from-accent/5 to-black/30 backdrop-blur-sm group-hover:border-accent/50 transition-all duration-500">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent z-20" />
-                <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-accent/40 rounded-tl-lg z-20" />
-                <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-accent/40 rounded-tr-lg z-20" />
-                <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-accent/40 rounded-bl-lg z-20" />
-                <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-accent/40 rounded-br-lg z-20" />
+          <div className="flex justify-center lg:justify-end w-full animate-fade-up" style={{ animationDelay: "200ms" }}>
+            <div className="relative group w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-full">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent/30 via-accent/10 to-transparent blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 -z-10" />
+              <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 border-accent/30 shadow-2xl shadow-accent/20 bg-gradient-to-br from-accent/5 to-black/30 group-hover:border-accent/50 transition-all duration-500">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent z-20" />
+                <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-accent/50 rounded-tl z-20" />
+                <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-accent/50 rounded-tr z-20" />
+                <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-accent/50 rounded-bl z-20" />
+                <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-accent/50 rounded-br z-20" />
                 <Image
                   src="/images/profile-photo.jpg"
                   alt="Saratchandra Patnaik — Backend & Distributed Systems Engineer"
@@ -127,7 +130,6 @@ export default function Hero() {
                   className="w-full h-full object-cover relative z-10 group-hover:scale-[1.02] transition-transform duration-500"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 pointer-events-none z-10" />
               </div>
             </div>
           </div>

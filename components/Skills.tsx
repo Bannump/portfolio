@@ -1,3 +1,7 @@
+"use client";
+
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const skillCategories = [
   {
     title: "Cloud & Infrastructure",
@@ -17,7 +21,7 @@ const skillCategories = [
     title: "Reliability & DevOps",
     skills: [
       "GitOps", "ArgoCD", "GitHub Actions", "Jenkins",
-      "Incident Response", "Grafana", "Shell Scripting", "IaC",
+      "Grafana", "Shell Scripting", "Observability", "On-call / Incident Ops",
     ],
   },
   {
@@ -37,40 +41,47 @@ const skillCategories = [
   {
     title: "Data & Storage",
     skills: [
-      "PostgreSQL", "Redis", "ChromaDB (Vector DB)",
-      "MySQL", "Firebase", "MariaDB",
+      "PostgreSQL", "Redis", "ChromaDB", "MySQL", "Firebase", "MariaDB",
     ],
   },
   {
     title: "Languages",
-    skills: ["Python", "C++", "Go", "TypeScript", "Java", "SQL", "Kotlin", "R", "C", "PHP"],
+    skills: ["Python", "C++", "Go", "TypeScript", "Java", "SQL", "Kotlin", "C"],
   },
 ];
 
+// Row-stagger: cards in the same row reveal with slight offsets
+const rowDelays = [0, 80, 160, 0, 80, 160, 0];
+
 export default function Skills() {
+  const sectionRef = useScrollReveal<HTMLElement>();
+
   return (
     <section
       id="skills"
+      ref={sectionRef}
       className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-black border-t border-accent/10"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-8 sm:mb-12 text-accent">
-          Technical Skills
+        <h2 data-reveal className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-8 sm:mb-12 text-accent">
+          Skills
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-          {skillCategories.map((category) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {skillCategories.map((category, idx) => (
             <div
               key={category.title}
-              className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-5 hover:border-accent/40 transition-all duration-300"
+              data-reveal
+              style={{ transitionDelay: `${rowDelays[idx] ?? 0}ms` }}
+              className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-5 hover:border-accent/40 hover:bg-accent/[0.03] transition-all duration-300"
             >
-              <h3 className="text-accent font-mono font-semibold mb-3 text-xs sm:text-sm tracking-wide">
+              <h3 className="text-accent font-mono font-semibold mb-3 text-xs tracking-widest uppercase">
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-1.5">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="font-mono text-[10px] sm:text-xs text-foreground/70 border border-foreground/10 px-2 py-0.5 rounded bg-white/5"
+                    className="font-mono text-[10px] sm:text-xs text-foreground/70 border border-foreground/10 px-2 py-0.5 rounded bg-white/5 hover:border-accent/30 hover:text-foreground/90 transition-colors duration-150 cursor-default"
                   >
                     {skill}
                   </span>
