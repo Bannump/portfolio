@@ -1,12 +1,13 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bannump.github.io";
   return [
     {
-      url: 'https://bannump.github.io',
+      url: siteUrl,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 1,
     },
-  ]
+  ];
 }

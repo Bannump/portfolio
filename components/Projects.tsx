@@ -1,50 +1,74 @@
-"use client";
+const ExternalLinkIcon = () => (
+  <svg className="w-4 h-4 ml-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+  </svg>
+);
 
-import { useEffect } from "react";
+interface Project {
+  category: string;
+  title: string;
+  stack: string[];
+  problem: string;
+  approach: string;
+  result: string;
+  link?: string;
+  linkText?: string;
+}
+
+const projects: Project[] = [
+  {
+    category: "SYSTEMS / C++",
+    title: "Multithreaded UDP Packet Processing Server",
+    stack: ["C++", "UDP", "POSIX IPC", "Multi-threading", "Shared Memory"],
+    problem:
+      "Simulate a telecom-grade component that receives encrypted binary UDP packets at high throughput and processes them without dropping or reordering.",
+    approach:
+      "Implemented a producer-consumer architecture with a thread pool and mutex-locked queues. Producers read raw UDP datagrams off the socket; consumer threads decrypt and process binary packet payloads in parallel. Statistics are exported via POSIX shared memory IPC for external monitoring.",
+    result:
+      "Sustained high packet ingestion rates with ordered processing guarantees and zero data loss under concurrent load.",
+    link: "https://github.com/Bannump/udp-multi-threading/blob/udp-multi-threading-version-1/README.md",
+    linkText: "View on GitHub",
+  },
+  {
+    category: "EDGE / CLOUD",
+    title: "AWS IoT Greengrass Edge Face Recognition",
+    stack: ["AWS IoT Greengrass", "Lambda", "EC2", "MQTT", "SQS", "PyTorch", "FaceNet", "MTCNN"],
+    problem:
+      "Deploy a real-time face recognition pipeline to an edge device with no pip access — standard cloud-based inference was too slow and the Lambda environment had no package manager.",
+    approach:
+      "Packaged raw PyTorch MTCNN and FaceNet models into a custom deployment bundle that runs in a pip-free AWS Lambda environment on Greengrass. Edge inference results are streamed asynchronously to the cloud via MQTT and SQS, decoupling edge processing from cloud consumption.",
+    result:
+      "Real-time face recognition at the edge with sub-second inference, cloud-synchronized event stream, and full operation without internet dependency.",
+  },
+  {
+    category: "PERFORMANCE / GPU",
+    title: "CUDA GPU Accelerated Image Processing",
+    stack: ["CUDA", "PyCUDA", "C++", "Python"],
+    problem:
+      "CPU-based 2D Gaussian filtering was a bottleneck for image processing workloads — single-threaded and unable to scale with image size.",
+    approach:
+      "Implemented a parallel CUDA kernel using shared memory tiling to avoid redundant global memory reads, loop unrolling to maximize instruction throughput, and grid-stride loops for arbitrary image sizes. Validated output quality with PSNR and SSIM metrics against the CPU reference.",
+    result:
+      "20x speedup over CPU implementation — from seconds to milliseconds per frame at full resolution.",
+    link: "https://github.com/Bannump/gpu-accelerated-image-processing/blob/version1/Project.ipynb",
+    linkText: "View on GitHub",
+  },
+  {
+    category: "AI / ML",
+    title: "Personal AI Agent — RAG System",
+    stack: ["Python", "ChromaDB", "OpenAI API", "Anthropic API", "LangChain", "GPT-4 Vision"],
+    problem:
+      "Build a composable personal AI assistant that handles diverse tasks — vehicle diagnostics from images, resume ATS optimization, and document Q&A — without coupling the logic to a single LLM provider.",
+    approach:
+      "Applied Clean Architecture to decouple domain logic from LLM providers (OpenAI, Anthropic). ChromaDB handles vector retrieval for document grounding; GPT-4 Vision processes image inputs for visual diagnostics. Each capability is a discrete use case wired through a shared retrieval layer.",
+    result:
+      "A maintainable multi-modal RAG system with swappable model backends and consistent retrieval quality across task types.",
+    link: "https://github.com/Bannump/portfolio/blob/main/README.md",
+    linkText: "View on GitHub",
+  },
+];
 
 export default function Projects() {
-  useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Projects.tsx:5',message:'Projects component rendering',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
-  }, []);
-  const projects = {
-    rag: {
-      title: "My Personal AI Agent (RAG)",
-      description:
-        "A sophisticated RAG (Retrieval-Augmented Generation) application serving as a personal AI assistant. Features vehicle diagnostics from images, resume analysis & ATS optimization, and intelligent resume building. Built with Python, ChromaDB, OpenAI/Anthropic APIs, and vision AI integration.",
-      link: "https://github.com/Bannump/portfolio/blob/main/README.md",
-      linkText: "View on GitHub",
-      icon: "🤖",
-    },
-    edgeAI: {
-      title: "Edge AI Face Recognition",
-      techStack: "AWS IoT Greengrass, Lambda, MQTT, PyTorch",
-      description:
-        "Built a real-time \"Smart Camera\" system deploying MTCNN and FaceNet models directly to the edge. Engineered a custom deployment pipeline to run raw PyTorch models in a pip-free AWS Lambda environment. Orchestrated asynchronous communication between Edge and Cloud using MQTT and SQS.",
-      link: "",
-      linkText: "View Architecture",
-      icon: "☁️",
-    },
-    gpu: {
-      title: "GPU Accelerated Image Processing",
-      techStack: "CUDA, PyCUDA, Python, C++",
-      description:
-        "Achieved 20x speedup over CPU implementations by engineering a parallel 2D Gaussian Filter. Optimized kernel performance using Shared Memory Tiling, Loop Unrolling, and Grid-Stride Loops to minimize global memory latency. Validated image fidelity using PSNR and SSIM metrics.",
-      link: "https://github.com/Bannump/gpu-accelerated-image-processing/blob/version1/Project.ipynb",
-      linkText: "View on GitHub",
-      icon: "🚀",
-    },
-    udp: {
-      title: "UDP Multi-Threading System",
-      description:
-        "High-performance telecom component simulation that receives encrypted custom packets via UDP, processes them using multi-threading (producer-consumer pattern), and reports statistics via POSIX shared memory (IPC). Demonstrates advanced C++ system programming, network protocols, and concurrent processing.",
-      link: "https://github.com/Bannump/udp-multi-threading/blob/udp-multi-threading-version-1/README.md",
-      linkText: "View on GitHub",
-      icon: "⚡",
-    },
-  };
-
   return (
     <section
       id="projects"
@@ -55,152 +79,66 @@ export default function Projects() {
           Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-          {/* RAG Project */}
-          <div className="card group bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
-            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{projects.rag.icon}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold mb-3 sm:mb-4 text-foreground break-words">
-              {projects.rag.title}
-            </h3>
-            <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed break-words">
-              {projects.rag.description}
-            </p>
-            <a
-              href={projects.rag.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
+          {projects.map((project) => (
+            <div
+              key={project.title}
+              className="group bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 flex flex-col"
             >
-              {projects.rag.linkText}
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-          </div>
-
-          {/* Edge AI Face Recognition Project */}
-          <div className="card group bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
-            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{projects.edgeAI.icon}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold mb-3 sm:mb-4 text-foreground break-words">
-              {projects.edgeAI.title}
-            </h3>
-            {projects.edgeAI.techStack && (
-              <p className="text-foreground/70 mb-2 sm:mb-3 font-mono text-xs sm:text-sm break-words">
-                <span className="text-accent font-semibold">Stack:</span>{" "}
-                {projects.edgeAI.techStack}
-              </p>
-            )}
-            <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed break-words">
-              {projects.edgeAI.description}
-            </p>
-            {projects.edgeAI.link ? (
-              <a
-                href={projects.edgeAI.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
-                onClick={()=>{fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Projects.tsx:105',message:'EdgeAI link clicked',data:{link:projects.edgeAI.link,isEmpty:!projects.edgeAI.link},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});}}
-              >
-                {projects.edgeAI.linkText}
-                <svg
-                  className="w-4 h-4 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
-            ) : (
-              <span className="inline-flex items-center text-foreground/50 font-mono text-sm sm:text-base break-words">
-                {projects.edgeAI.linkText}
+              {/* Category badge */}
+              <span className="inline-block font-mono text-[10px] tracking-widest text-accent/60 border border-accent/20 px-2 py-0.5 rounded mb-3 w-fit">
+                {project.category}
               </span>
-            )}
-          </div>
 
-          {/* GPU Accelerated Image Processing Project */}
-          <div className="card group bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
-            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{projects.gpu.icon}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold mb-3 sm:mb-4 text-foreground break-words">
-              {projects.gpu.title}
-            </h3>
-            {projects.gpu.techStack && (
-              <p className="text-foreground/70 mb-2 sm:mb-3 font-mono text-xs sm:text-sm break-words">
-                <span className="text-accent font-semibold">Stack:</span>{" "}
-                {projects.gpu.techStack}
-              </p>
-            )}
-            <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed break-words">
-              {projects.gpu.description}
-            </p>
-            <a
-              href={projects.gpu.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
-            >
-              {projects.gpu.linkText}
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-          </div>
+              <h3 className="text-base sm:text-lg md:text-xl font-mono font-semibold mb-4 text-foreground">
+                {project.title}
+              </h3>
 
-          {/* UDP Multi-Threading Project */}
-          <div className="card group bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
-            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{projects.udp.icon}</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold mb-3 sm:mb-4 text-foreground break-words">
-              {projects.udp.title}
-            </h3>
-            <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed break-words">
-              {projects.udp.description}
-            </p>
-            <a
-              href={projects.udp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-accent font-mono font-semibold text-sm sm:text-base hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300 break-words"
-            >
-              {projects.udp.linkText}
-              <svg
-                className="w-4 h-4 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a>
-          </div>
+              {/* Tech stack pills */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-mono text-[10px] sm:text-xs text-foreground/60 border border-foreground/10 px-2 py-0.5 rounded bg-white/5"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Problem / Approach / Result */}
+              <div className="space-y-3 text-sm text-foreground/80 leading-relaxed flex-1">
+                <p>
+                  <span className="text-accent font-semibold font-mono">Problem:</span>{" "}
+                  {project.problem}
+                </p>
+                <p>
+                  <span className="text-accent font-semibold font-mono">Approach:</span>{" "}
+                  {project.approach}
+                </p>
+                <p>
+                  <span className="text-accent font-semibold font-mono">Result:</span>{" "}
+                  {project.result}
+                </p>
+              </div>
+
+              {/* Link */}
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center text-accent font-mono font-semibold text-sm hover:text-accent-dark transition-colors group-hover:translate-x-1 duration-300"
+                >
+                  {project.linkText}
+                  <ExternalLinkIcon />
+                </a>
+              ) : (
+                <span className="mt-5 inline-flex items-center text-foreground/30 font-mono text-sm">
+                  Repository private
+                </span>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
