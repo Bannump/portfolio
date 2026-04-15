@@ -1,417 +1,267 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const amagiMetrics = [
+  { value: "15+", label: "Microservices" },
+  { value: "99.9%", label: "Release Stability" },
+  { value: "60%", label: "Faster RCA" },
+  { value: "90%", label: "Setup Reduction" },
+  { value: "95%", label: "Fewer CDN Failures" },
+];
 
 export default function Experience() {
-  useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7243/ingest/0af3cabb-91ee-4717-b74b-68f1609c805f',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Experience.tsx:6',message:'Experience component rendering',data:{timestamp:Date.now()},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
-  }, []);
-  const experiences = [
-    {
-      title: "Software Engineer (Cloud & DevOps)",
-      date: "Aug 2022 – Nov 2023",
-      company: "Amagi Media Labs",
-      location: "Bengaluru, India",
-      tech: "AWS EKS, FastAPI, ArgoCD, Terraform, LLMs",
-      achievements: [
-        {
-          category: "Cloud Native Systems",
-          description:
-            "Deployed and scaled a Kubernetes-based microservices platform (15+ services), achieving 99.9% release stability and increasing deployment frequency by 30%.",
-        },
-        {
-          category: "Backend Engineering",
-          description:
-            "Designed asynchronous RESTful APIs using FastAPI and Python, significantly reducing data-processing latency for internal tools.",
-        },
-        {
-          category: "DevOps & IaC",
-          description:
-            "Automated customer onboarding using Terraform and Python, cutting manual setup efforts by 90% and reducing CDN delivery failures by 95%.",
-        },
-        {
-          category: "AI & Automation",
-          description:
-            "Engineered ML data pipelines to ingest server logs into LLMs, automating root cause analysis and reducing manual debugging time by 60%.",
-        },
-      ],
-    },
-    {
-      title: "Software Engineer Intern",
-      date: "Apr 2021 – June 2021",
-      company: "Blueplanet Solutions Inc.",
-      location: "India",
-      tech: "MySQL, PHP, JavaScript",
-      achievements: [
-        {
-          category: "Performance Optimization",
-          description:
-            "Refactored MySQL stored procedures and application interfaces, reducing search latency by 60% for over 1,000 user profiles.",
-        },
-        {
-          category: "Stability Engineering",
-          description:
-            "Diagnosed server logs to resolve critical memory leaks, increasing application release stability by 30%.",
-        },
-      ],
-    },
-    {
-      title: "Graduate Teaching Assistant / Grader",
-      date: "Aug 2025 – Dec 2025",
-      company: "Arizona State University",
-      location: "Tempe, AZ",
-      tech: null,
-      achievements: [
-        {
-          category: null,
-          description:
-            "Evaluated graduate-level implementations of Applied Cryptography protocols, focusing on security standards and encryption logic.",
-        },
-        {
-          category: null,
-          description:
-            "Mentored students on securing distributed systems against vulnerabilities.",
-        },
-      ],
-    },
-    {
-      title: "AI Solutions Architect (Independent)",
-      date: "Oct 2025 – Present",
-      company: "Passion Projects",
-      location: null,
-      tech: null,
-      achievements: [
-        {
-          category: "RAG System",
-          description:
-            "Architected a 'My Personal Agent' using ChromaDB and GPT-4, utilizing Clean Architecture to decouple LLM providers.",
-        },
-        {
-          category: "Multimodal AI",
-          description:
-            "Integrated GPT-4 Vision for real-time visual diagnostics and built an ATS Resume Optimizer using vector embeddings.",
-        },
-        {
-          category: "High-Performance Computing",
-          description:
-            "Engineered a multi-threaded UDP server in C++ with thread pooling and mutex locking to simulate real-time telematics transmission.",
-        },
-      ],
-    },
-  ];
+  const [amagiExpanded, setAmagiExpanded] = useState(false);
+  const sectionRef = useScrollReveal<HTMLElement>();
 
   return (
     <section
       id="experience"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-black"
+      ref={sectionRef}
+      className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-black border-t border-accent/10"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-8 sm:mb-12 md:mb-16 text-accent">
-          Professional Experience
+        <h2 data-reveal className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-8 sm:mb-12 md:mb-16 text-accent">
+          Experience
         </h2>
+
         <div className="space-y-4 sm:space-y-6">
-          {experiences.map((exp, index) => {
-            const isAmagi = exp.company === "Amagi Media Labs";
-            if (isAmagi) {
-              return (
-                <div
-                  key={index}
-                  className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
-                >
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4 gap-2">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-1 sm:mb-2 break-words">
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-foreground/80 font-mono break-words">
-                        {exp.company}
-                        {exp.location && ` | ${exp.location}`}
-                      </p>
-                    </div>
-                    <span className="text-accent font-mono text-xs sm:text-sm md:text-base whitespace-nowrap sm:ml-4">
-                      {exp.date}
-                    </span>
-                  </div>
-                  <p className="text-foreground/70 mb-3 sm:mb-4 font-mono text-xs sm:text-sm break-words">
-                    <span className="text-accent font-semibold">Key Stack:</span>{" "}
-                    AWS EKS, FastAPI, ArgoCD, Terraform, GenAI
-                  </p>
-                  <p className="text-sm sm:text-base text-foreground leading-relaxed break-words mb-6">
-                  Engineered high-throughput distributed systems for real-time media streaming and architected intelligent fault-tolerance workflows that eliminated 60% of operational overhead.
-                  </p>
 
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    Scaling Cloud-Native Infrastructure (AWS & Kubernetes)
-                  </h4>
-                  <div className="space-y-3 mb-6 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">
-                        The Infrastructure:
-                      </span>{" "}
-                      Owned the lifecycle of a high-availability microservices
-                      platform hosting 15+ critical services on AWS EKS.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Reliability Engineering:
-                      </span>{" "}
-                      Transitioned deployment to GitOps using ArgoCD, ensuring
-                      version-controlled and reproducible infra. Achieved 99.9%
-                      release stability and increased deployment frequency by
-                      30%.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Incident Response (DRI):
-                      </span>{" "}
-                      Resolved a critical streaming outage by tracing concurrent
-                      inbound streams across distributed nodes, restoring full
-                      service availability within minutes.
-                    </p>
-                  </div>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    High-Performance Backend & Media Streaming
-                  </h4>
-                  <div className="space-y-3 mb-6 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Protocol Optimization:
-                      </span>{" "}
-                      Engineered real-time streaming workflows for WebRTC and
-                      WebRTS clients. Optimized H.264/H.265 codecs and AWS
-                      MediaLive configurations to maximize device compatibility,
-                      reducing playback errors by 95%.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Backend Design:
-                      </span>{" "}
-                      Built asynchronous, non-blocking REST APIs using FastAPI
-                      (Python) to handle high-concurrency requests, reducing
-                      data processing latency.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Hardware Integration:
-                      </span>{" "}
-                      Integrated StreamDeck client systems to let broadcast
-                      operators control media dashboards in real time.
-                    </p>
-                  </div>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    DevOps Automation & Infrastructure as Code (IaC)
-                  </h4>
-                  <div className="space-y-3 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Eliminating Toil:
-                      </span>{" "}
-                      Automated customer onboarding with Terraform and Python to
-                      provision VPCs, subnets, and customer environments
-                      instantly.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">Impact:</span>{" "}
-                      Cut manual setup efforts by 90%, turning a multi-day
-                      process into a one-click operation.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Quality Assurance:
-                      </span>{" "}
-                      Automated CDN configuration checks to proactively catch
-                      delivery issues, reducing CDN failures by 95%.
-                    </p>
-                  </div>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3 mt-6">
-                    Architecting AI-Driven Observability & ML Pipelines
-                  </h4>
-                  <div className="space-y-3 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">
-                        The Problem:
-                      </span>{" "}
-                      Root cause analysis for server failures was manual and
-                      slow, often involving hours of sifting through raw logs.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        The Solution:
-                      </span>{" "}
-                      Engineered a custom GenAI Observability Pipeline that
-                      ingested terabytes of server logs into Large Language
-                      Models (LLMs). The system semantically analyzed error
-                      patterns to predict failures before downtime.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">Impact:</span>{" "}
-                      Automated root cause analysis reduced manual debugging
-                      time by 60%, allowing the team to focus on feature
-                      development.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">
-                        Capsequo Project:
-                      </span>{" "}
-                      Led deployment of Capsequo, a Python-based ML captioning
-                      pipeline. Optimized real-time API integration to reduce
-                      video stream processing latency by 36%, improving live
-                      broadcast viewer experience.
-                    </p>
-                  </div>
-                </div>
-              );
-            }
-
-            const isBlueplanet = exp.company === "Blueplanet Solutions Inc.";
-            if (isBlueplanet) {
-              return (
-                <div
-                  key={index}
-                  className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
-                >
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4 gap-2">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-1 sm:mb-2 break-words">
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-foreground/80 font-mono break-words">
-                        {exp.company}
-                        {exp.location && ` | ${exp.location}`}
-                      </p>
-                    </div>
-                    <span className="text-accent font-mono text-xs sm:text-sm md:text-base whitespace-nowrap sm:ml-4">
-                      {exp.date}
-                    </span>
-                  </div>
-                  <p className="text-foreground/70 mb-3 sm:mb-4 font-mono text-xs sm:text-sm break-words">
-                    <span className="text-accent font-semibold">Tech Stack:</span>{" "}
-                    MySQL, PHP, JavaScript, Linux System Logs
-                  </p>
-                  <p className="text-sm sm:text-base text-foreground leading-relaxed break-words mb-6">
-                    Optimized full-stack performance for the &quot;Campus Club&quot;
-                    portal, serving 1,000+ users. Reduced search latency by 60%
-                    and resolved critical memory leaks.
-                  </p>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    Database Performance Optimization
-                  </h4>
-                  <div className="space-y-3 mb-6 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">The Context:</span>{" "}
-                      As the &quot;Campus Club&quot; portal grew to 1,000+ profiles,
-                      search queries degraded to 3+ seconds, hurting UX.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">The Action:</span>{" "}
-                      Analyzed MySQL execution plans, refactored monolithic
-                      queries into optimized stored procedures, removed
-                      redundant joins, and implemented proper indexing.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">The Result:</span>{" "}
-                      Reduced server-side query execution time by 50%, enabling
-                      sub-second data retrieval.
-                    </p>
-                  </div>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    Frontend Modernization & UX
-                  </h4>
-                  <div className="space-y-3 mb-6 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">The Action:</span>{" "}
-                      Built a responsive, asynchronous search UI using
-                      JavaScript (AJAX) and PHP, replacing full-page reloads.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">The Result:</span>{" "}
-                      Improved time-to-result by 60% and reduced server
-                      bandwidth usage.
-                    </p>
-                  </div>
-
-                  <h4 className="text-xl sm:text-2xl font-mono font-semibold text-foreground mb-3">
-                    Stability & Root Cause Analysis
-                  </h4>
-                  <div className="space-y-3 text-sm sm:text-base text-foreground/80 leading-relaxed">
-                    <p>
-                      <span className="text-accent font-semibold">The Challenge:</span>{" "}
-                      Intermittent crashes and out-of-memory errors during peak
-                      usage.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">The Debugging:</span>{" "}
-                      Parsed web server logs to trace a memory leak caused by
-                      unclosed database connections in legacy PHP.
-                    </p>
-                    <p>
-                      <span className="text-accent font-semibold">The Result:</span>{" "}
-                      Patched connection handling to ensure cleanup, improving
-                      stability by 30% and eliminating recurring crashes.
-                    </p>
-                  </div>
-                </div>
-              );
-            }
-
-            return (
-              <div
-                key={index}
-                className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 md:p-8 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5"
-              >
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4 gap-2">
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-1 sm:mb-2 break-words">
-                      {exp.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-foreground/80 font-mono break-words">
-                      {exp.company}
-                      {exp.location && ` | ${exp.location}`}
-                    </p>
-                  </div>
-                  <span className="text-accent font-mono text-xs sm:text-sm md:text-base whitespace-nowrap sm:ml-4">
-                    {exp.date}
-                  </span>
-                </div>
-                {exp.tech && (
-                  <p className="text-foreground/70 mb-3 sm:mb-4 font-mono text-xs sm:text-sm break-words">
-                    <span className="text-accent font-semibold">Tech:</span>{" "}
-                    {exp.tech}
-                  </p>
-                )}
-                <ul className="space-y-2 sm:space-y-3 mt-4 sm:mt-6">
-                  {exp.achievements.map((achievement, idx) => (
-                    <li
-                      key={idx}
-                      className="text-sm sm:text-base text-foreground leading-relaxed flex items-start break-words"
-                    >
-                      <span className="text-accent mr-2 mt-1 flex-shrink-0">
-                        ▹
-                      </span>
-                      <span>
-                        {achievement.category && (
-                          <span className="text-accent font-semibold">
-                            {achievement.category}:
-                          </span>
-                        )}{" "}
-                        {achievement.description}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+          {/* ── Graduate Research Assistant ── */}
+          <div data-reveal className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-2">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-0.5">
+                  Graduate Research Assistant
+                </h3>
+                <p className="text-sm sm:text-base text-foreground/70 font-mono">
+                  Arizona State University · Tempe, AZ
+                </p>
               </div>
-            );
-          })}
+              <span className="text-accent font-mono text-xs sm:text-sm whitespace-nowrap sm:ml-4 mt-1 sm:mt-0">
+                Jan 2026 – Present
+              </span>
+            </div>
+            <p className="text-xs text-foreground/50 font-mono mb-4 tracking-wide uppercase">
+              Software Verification, Validation &amp; Testing
+            </p>
+            <ul className="space-y-2 sm:space-y-3">
+              {[
+                "Research fault analysis and correctness properties for distributed system components, contributing to active work in software verification, validation, and automated testing.",
+                "Prepare publication-ready manuscripts through technical synthesis, literature analysis, and structured academic writing in collaboration with faculty.",
+                "Develop course materials on formal verification techniques and automated testing frameworks for graduate-level instruction.",
+              ].map((bullet, i) => (
+                <li key={i} className="text-sm text-foreground/80 leading-relaxed flex items-start">
+                  <span className="text-accent mr-2 mt-1 flex-shrink-0">▹</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ── Amagi Media Labs ── */}
+          <div data-reveal className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-2">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-0.5">
+                  Software Implementation Engineer
+                </h3>
+                <p className="text-sm sm:text-base text-foreground/70 font-mono">
+                  Amagi Media Labs · Bengaluru, India
+                </p>
+              </div>
+              <span className="text-accent font-mono text-xs sm:text-sm whitespace-nowrap sm:ml-4 mt-1 sm:mt-0">
+                Aug 2022 – Nov 2023
+              </span>
+            </div>
+            <p className="text-xs text-foreground/50 font-mono mb-4 tracking-wide">
+              AWS EKS · Python · FastAPI · Kubernetes · Docker · ArgoCD · Terraform · Linux
+            </p>
+
+            {/* Metric chips */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {amagiMetrics.map(({ value, label }) => (
+                <div
+                  key={label}
+                  className="flex flex-col items-center border border-accent/25 rounded-md px-3 py-1.5 bg-accent/5 min-w-[68px]"
+                >
+                  <span className="text-accent font-mono font-bold text-sm leading-tight">{value}</span>
+                  <span className="text-foreground/50 font-mono text-[9px] leading-tight text-center mt-0.5">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-sm sm:text-base text-foreground leading-relaxed mb-5">
+              Owned reliability and operations for large-scale broadcast streaming infrastructure
+              on AWS EKS — debugging live failures, building failover logic, and running the
+              automation layer that kept 15+ production microservices stable for major media
+              clients.
+            </p>
+
+            {/* Resume bullet points */}
+            <ul className="space-y-2 sm:space-y-2.5 mb-7">
+              {[
+                "Optimized media workflow latency by 93.75%, from 8 minutes to 30 seconds, by building asynchronous Python/FastAPI frame and metadata pipelines with CV models.",
+                "Reduced manual debugging time by 60% by designing an AI-powered observability pipeline that ingested server logs into LLMs to automate root cause analysis.",
+                "Led the first successful deployment of Amagi-native ML speech-to-text services, Capsequo and Akashvani, and enabled org-wide adoption by training teams across the organization on deployment workflows.",
+                "Improved deployment frequency by 30% for a Kubernetes platform hosting 15+ microservices by owning AWS EKS releases, implementing ArgoCD GitOps, and maintaining 99.9% rollout stability.",
+              ].map((bullet, i) => (
+                <li key={i} className="text-sm text-foreground/80 leading-relaxed flex items-start">
+                  <span className="text-accent mr-2 mt-1 flex-shrink-0">▹</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Story 1 — always visible */}
+            <h4 className="text-sm sm:text-base font-mono font-semibold text-foreground mb-3 uppercase tracking-wide">
+              Stream Reliability &amp; Incident Response
+            </h4>
+            <div className="space-y-2.5 mb-6 text-sm text-foreground/80 leading-relaxed">
+              <p>
+                <span className="text-accent font-semibold">Incident:</span>{" "}
+                A critical client&apos;s live stream fell back to rescue content due to an audio
+                silence condition — a silent failure that required tracing logs across EC2
+                instances, Kubernetes pods, and multiple microservices to diagnose.
+              </p>
+              <p>
+                <span className="text-accent font-semibold">Finding:</span>{" "}
+                The provider had primary and secondary input streams but no automated health
+                check or switching mechanism. Audio silence propagated undetected until the
+                playout system gave up and triggered rescue content.
+              </p>
+              <p>
+                <span className="text-accent font-semibold">Fix:</span>{" "}
+                Implemented threshold-based failover logic that monitors audio presence and
+                switches to the healthy secondary stream when silence persists beyond a defined
+                window — eliminating rescue fallback and hardening the client&apos;s stream
+                against input failures.
+              </p>
+            </div>
+
+            {/* Expandable stories 2–4 */}
+            <div className={`expandable${amagiExpanded ? " open" : ""}`}>
+              <div>
+                {/* Story 2 */}
+                <h4 className="text-sm sm:text-base font-mono font-semibold text-foreground mb-3 uppercase tracking-wide pt-1">
+                  Streaming Platform &amp; Protocol Debugging
+                </h4>
+                <div className="space-y-2.5 mb-6 text-sm text-foreground/80 leading-relaxed">
+                  <p>
+                    <span className="text-accent font-semibold">Scope:</span>{" "}
+                    Investigated manifest behavior, proxy chain issues, and SCTE marker handling
+                    across production streaming services — crossing platform, infrastructure, and
+                    client-facing boundaries to isolate live traffic failures.
+                  </p>
+                  <p>
+                    <span className="text-accent font-semibold">Codec &amp; Protocol Work:</span>{" "}
+                    Debugged H.264/H.265 codec configurations and AWS MediaLive settings to resolve
+                    client-facing playback errors across WebRTC and WebRTS workflows — reduced
+                    playback errors by 95%.
+                  </p>
+                  <p>
+                    <span className="text-accent font-semibold">Backend:</span>{" "}
+                    Built non-blocking FastAPI services for high-concurrency streaming control;
+                    integrated StreamDeck hardware for real-time broadcast operator control.
+                  </p>
+                </div>
+
+                {/* Story 3 */}
+                <h4 className="text-sm sm:text-base font-mono font-semibold text-foreground mb-3 uppercase tracking-wide">
+                  AI-Assisted Observability &amp; RCA Automation
+                </h4>
+                <div className="space-y-2.5 mb-6 text-sm text-foreground/80 leading-relaxed">
+                  <p>
+                    <span className="text-accent font-semibold">Problem:</span>{" "}
+                    RCA was a bottleneck — engineers repeatedly inspected the same logs to diagnose
+                    recurring failures, with each incident costing hours of manual investigation.
+                  </p>
+                  <p>
+                    <span className="text-accent font-semibold">Solution:</span>{" "}
+                    Built an AI-assisted observability pipeline that ingests server logs into LLMs
+                    for automated semantic pattern analysis, surfacing likely failure causes without
+                    manual inspection.
+                  </p>
+                  <p>
+                    <span className="text-accent font-semibold">Impact:</span>{" "}
+                    Reduced manual debugging time by 60%. Also deployed the Capsequo ML captioning
+                    pipeline, cutting video stream processing latency by 36%.
+                  </p>
+                </div>
+
+                {/* Story 4 */}
+                <h4 className="text-sm sm:text-base font-mono font-semibold text-foreground mb-3 uppercase tracking-wide">
+                  Infrastructure Automation &amp; GitOps
+                </h4>
+                <div className="space-y-2.5 mb-2 text-sm text-foreground/80 leading-relaxed">
+                  <p>
+                    <span className="text-accent font-semibold">GitOps:</span>{" "}
+                    Moved deployments to ArgoCD for version-controlled, reproducible releases —
+                    99.9% rollout stability and 30% higher deployment frequency across 15+ services.
+                  </p>
+                  <p>
+                    <span className="text-accent font-semibold">IaC:</span>{" "}
+                    Automated customer environment provisioning with Terraform (VPCs, subnets, CDN)
+                    — cut manual setup by 90% and CDN delivery failures by 95%.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Expand / Collapse toggle */}
+            <button
+              onClick={() => setAmagiExpanded((v) => !v)}
+              className="mt-4 flex items-center gap-1.5 text-accent/70 hover:text-accent font-mono text-xs transition-colors duration-200 group"
+            >
+              <svg
+                className={`w-3.5 h-3.5 transition-transform duration-300 ${amagiExpanded ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+              {amagiExpanded ? "Show less" : "Show 3 more stories"}
+            </button>
+          </div>
+
+          {/* ── Blueplanet Solutions ── */}
+          <div data-reveal className="bg-black/50 border border-accent/20 rounded-lg p-4 sm:p-6 hover:border-accent/40 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-1 sm:gap-2">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-mono font-semibold text-foreground mb-0.5">
+                  Software Engineer Intern
+                </h3>
+                <p className="text-sm sm:text-base text-foreground/70 font-mono">
+                  Blueplanet Solutions Inc. · India
+                </p>
+              </div>
+              <span className="text-accent font-mono text-xs sm:text-sm whitespace-nowrap sm:ml-4 mt-1 sm:mt-0">
+                Apr 2021 – Jun 2021
+              </span>
+            </div>
+            <p className="text-xs text-foreground/50 font-mono mb-4 tracking-wide">
+              MySQL · PHP · JavaScript · Linux
+            </p>
+            <ul className="space-y-2 sm:space-y-3">
+              {[
+                { label: "Database Optimization", text: "Analyzed MySQL execution plans, refactored queries into optimized stored procedures with proper indexing — cut query execution time by 50%, enabling sub-second retrieval for 1,000+ user profiles." },
+                { label: "Root Cause Analysis", text: "Traced intermittent memory leaks to unclosed DB connections in legacy PHP by parsing web server logs. Patched connection handling — improved stability by 30% and eliminated recurring crashes." },
+                { label: "Frontend", text: "Built an async search UI with JavaScript (AJAX) and PHP to replace full-page reloads — improved time-to-result by 60%." },
+              ].map(({ label, text }, i) => (
+                <li key={i} className="text-sm text-foreground/80 leading-relaxed flex items-start">
+                  <span className="text-accent mr-2 mt-1 flex-shrink-0">▹</span>
+                  <span>
+                    <span className="text-accent font-semibold">{label}:</span>{" "}{text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
       </div>
-
     </section>
   );
 }

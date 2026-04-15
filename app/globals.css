@@ -84,3 +84,46 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #0ea5e9;
 }
+
+/* ── Entrance animation (above-fold, plays on load) ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.65s ease both;
+}
+
+/* ── Scroll reveal (below-fold, triggered by IntersectionObserver) ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+[data-reveal].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Collapsible expand animation ── */
+.expandable {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.expandable.open {
+  grid-template-rows: 1fr;
+}
+
+.expandable > div {
+  overflow: hidden;
+}

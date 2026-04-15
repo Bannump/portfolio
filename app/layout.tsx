@@ -4,15 +4,41 @@ import "./globals.css";
 import PortfolioChatbot from "@/components/PortfolioChatbot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const firaCode = Fira_Code({ 
-  subsets: ["latin"], 
+const firaCode = Fira_Code({
+  subsets: ["latin"],
   variable: "--font-fira-code",
-  weight: ["300", "400", "500", "600", "700"]
+  weight: ["300", "400", "500", "600", "700"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bannump.github.io";
+
 export const metadata: Metadata = {
-  title: "Saratchandra Patnaik | Software Engineer",
-  description: "AI-Focused Software Engineer specializing in Cloud Native Development and Applied Cryptography. MS CS Graduate (ASU '25) | Ex-Amagi Media Labs.",
+  metadataBase: new URL(siteUrl),
+  title: "Saratchandra Patnaik — Backend & Distributed Systems Engineer",
+  description:
+    "Backend and distributed systems engineer with production experience at Amagi Media Labs. Specializes in AWS, Kubernetes, reliability engineering, streaming infrastructure, and cloud-native systems. MS CS @ Arizona State University.",
+  openGraph: {
+    title: "Saratchandra Patnaik — Backend & Distributed Systems Engineer",
+    description:
+      "Backend and distributed systems engineer with production experience at Amagi Media Labs. AWS · Kubernetes · Python · Reliability Engineering. MS CS @ ASU.",
+    type: "website",
+    url: siteUrl,
+    images: [
+      {
+        url: "/images/profile-photo.jpg",
+        width: 600,
+        height: 720,
+        alt: "Saratchandra Patnaik",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saratchandra Patnaik — Backend & Distributed Systems Engineer",
+    description:
+      "Backend and distributed systems engineer. AWS · Kubernetes · Python · Reliability. MS CS @ ASU. Ex-Amagi Media Labs.",
+    images: ["/images/profile-photo.jpg"],
+  },
   icons: {
     icon: "/favicon.svg",
   },
